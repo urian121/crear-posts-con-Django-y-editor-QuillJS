@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Posts - Post con Django y Quill{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="fw-bold">Lista de Posts</h1>
+    <p class="text-muted">Explora los posts creados con QuillJS y Django</p>
+</div>
+
+{% if posts %}
+<div class="row g-4">
+    {% for post in posts %}
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|safe }}</p>
+            </div>
+            <div class="card-footer text-muted small">
+                Publicado: {{ post.created_at|date:"d M Y H:i" }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info text-center" role="alert">
+    Aún no hay posts. ¡Crea el primero! 😎
+</div>
+{% endif %}
+{% endblock %}
